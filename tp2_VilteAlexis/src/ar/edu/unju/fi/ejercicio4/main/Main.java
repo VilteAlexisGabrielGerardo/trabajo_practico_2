@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Main {
     private static ArrayList<Jugador> jugadores = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
         byte opcion;
         do {
@@ -30,7 +29,7 @@ public class Main {
                         eliminarJugador();
                         break;
                     case 5:
-                        System.out.println("Saliendo del programa...");
+                        System.out.println("Programa finalizado");
                         break;
                     default:
                         System.out.println("Opción inválida");
@@ -55,6 +54,7 @@ public class Main {
         System.out.print("Seleccione una opción: ");
     }
 
+    // Aca se da el alta del jugador utilizando los enum seleccionados de posiciones
     private static void altaJugador() {
         System.out.println("Ingrese los datos del jugador:");
         System.out.print("Nombre del jugador: ");
@@ -73,7 +73,7 @@ public class Main {
         scanner.nextLine();
         System.out.print("Posición (DELANTERO, MEDIO, DEFENSA, ARQUERO): ");
         String posicionStr = scanner.nextLine();
-        Posicion posicion = Posicion.valueOf(posicionStr.toUpperCase()); // Convertir a enum
+        Posicion posicion = Posicion.valueOf(posicionStr.toUpperCase());
         Jugador jugador = new Jugador(nombre, apellido, fechaNacimiento, nacionalidad, estatura, peso, posicion);
         jugadores.add(jugador);
     }
@@ -87,34 +87,33 @@ public class Main {
             }
         }
     }
-
+    //Modificamos la posicion utilizando enums
     private static void modificarPosicionJugador() {
-        System.out.println("Ingrese el nombre del jugador: ");
+        System.out.println("Nombre del jugador: ");
         String nombre = scanner.nextLine();
-        System.out.println("Ingrese el apellido del jugador: ");
+        System.out.println("Apellido del jugador: ");
         String apellido = scanner.nextLine();
         boolean encontrado = false;
         for (Jugador jugador : jugadores) {
             if (jugador.getNombre().equalsIgnoreCase(nombre) && jugador.getApellido().equalsIgnoreCase(apellido)) {
                 encontrado = true;
-                System.out.print("Nueva posición (DELANTERO, MEDIO, DEFENSA, ARQUERO): ");
+                System.out.print("Nueva posicion (DELANTERO, MEDIO, DEFENSA, ARQUERO): ");
                 String nuevaPosicionStr = scanner.nextLine();
-                Posicion nuevaPosicion = Posicion.valueOf(nuevaPosicionStr.toUpperCase()); // Convertir a enum
+                Posicion nuevaPosicion = Posicion.valueOf(nuevaPosicionStr.toUpperCase());
                 jugador.setPosicion(nuevaPosicion);
-                System.out.println("Posición del jugador modificada correctamente");
+                System.out.println("Se ha modificado correctamente");
                 break;
             }
         }
-
         if (!encontrado) {
             System.out.println("Jugador no encontrado");
         }
     }
-
+    // Eliminacion del jugador usando iterator
     private static void eliminarJugador() {
-        System.out.println("Ingrese el nombre del jugador a eliminar: ");
+        System.out.println("Nombre del jugador a eliminar: ");
         String nombre = scanner.nextLine();
-        System.out.println("Ingrese el apellido del jugador a eliminar: ");
+        System.out.println("Apellido del jugador a eliminar: ");
         String apellido = scanner.nextLine();
         boolean encontrado = false;
         Iterator<Jugador> iterator = jugadores.iterator();
@@ -128,7 +127,7 @@ public class Main {
             }
         }
         if (!encontrado) {
-            System.out.println("Jugador no encontrado.");
+            System.out.println("Jugador no encontrado");
         }
     }
 }
